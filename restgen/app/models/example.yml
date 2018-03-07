@@ -1,0 +1,9 @@
+---
+mapa:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: texto
+  coordenada:
+    tipo: texto

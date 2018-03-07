@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  frontend:
+    container_name: "app-frontend"
+    build: ./frontend
+    volumes:
+      - "./frontend/code:/angular/code"
+    ports:
+      - "4200:4200"
+  backend:
+    container_name: "app-backend"
+    build: ./backend
+    ports:
+      - "5000:5000"

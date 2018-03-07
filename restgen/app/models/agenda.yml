@@ -1,0 +1,16 @@
+---
+agenda:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: texto
+    nulo: no
+  apellido:
+    tipo: texto
+  telefono:
+    tipo: texto
+  dependencia:
+    tipo: texto
+  twitter:
+    tipo: texto

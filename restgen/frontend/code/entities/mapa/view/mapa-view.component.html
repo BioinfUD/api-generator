@@ -1,0 +1,21 @@
+
+<h2>mapas</h2>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-dataTable [value]="mapas">
+  <p-column field="coordenada" header="Coordenada" [sortable]="true"></p-column>
+  <p-column field="nombre" header="Nombre" [sortable]="true"></p-column>
+  <p-column field="id" header="Id" [sortable]="true"></p-column>
+  
+<p-column field="" header="Acciones">
+    <ng-template let-col let-registro="rowData" pTemplate="body">
+      <button pButton icon="fa-close" type="button" (click)="borrar(registro)"></button>
+      <button pButton icon="fa-edit" type="button" (click)="editar(registro)"></button>
+    </ng-template>
+  </p-column>
+</p-dataTable>
+<button class="accept" pButton type="button" label="Crear mapa" (click)="newMapa()"></button>

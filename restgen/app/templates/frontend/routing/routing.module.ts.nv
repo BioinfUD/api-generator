@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+{% for entity in model -%}
+import { {{entity | capitalize }}Component } from '../{{entity | lower }}/view/{{entity | lower }}-view.component';
+import { {{entity | capitalize }}NewComponent } from '../{{entity | lower }}/new/{{entity | lower}}-new.component';
+import { {{entity | capitalize }}EditComponent } from '../{{entity | lower }}/edit/{{entity | lower}}-edit.component';
+{% endfor %}
+
+const routes: Routes = [
+  {% for entity in model -%}
+  { path: '{{entity | lower }}', component: {{entity | capitalize }}Component },
+  { path: '{{entity | lower }}/new', component: {{entity | capitalize }}NewComponent },
+  { path: '{{entity | lower }}/edit/:id', component: {{entity | capitalize }}EditComponent },
+  {% endfor -%}
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule],
+  declarations: []
+})
+export class RoutingModule { }

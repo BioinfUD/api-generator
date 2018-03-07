@@ -1,0 +1,48 @@
+import { Component, OnInit } from '@angular/core';
+import { {{ entity | capitalize }}Service } from '../../services/{{ entity | lower }}.service';
+import { {{ entity | capitalize }} } from '../../models/{{ entity | lower }}';
+import { Router} from '@angular/router';
+import { GlobalsComponent } from '../../globals/globals.component';
+import { ConfirmationService } from 'primeng/primeng';
+
+@Component({
+  selector: 'app-{{ entity | lower }}',
+  templateUrl: './{{ entity | lower }}-view.component.html',
+  styleUrls: []
+})
+export class {{ entity | capitalize }}Component implements OnInit {
+
+  {{ entity | lower }}s: {{ entity | capitalize }}[];
+  {{ entity | lower }}: {{ entity | capitalize }};
+
+  constructor(private {{ entity | lower }}Service: {{ entity | capitalize }}Service,
+      private router: Router, private globals: GlobalsComponent,
+      private confirmationService: ConfirmationService) {
+      this.globals = globals;
+  }
+
+  ngOnInit(): void {
+    this.{{ entity | lower }}Service.get{{ entity | capitalize }}s().then({{ entity | lower }}s => this.{{ entity | lower }}s = {{ entity | lower }}s);
+  }
+
+  new{{ entity | capitalize }}(): void {
+
+    this.router.navigate(['/{{ entity | lower }}/new']).then(() => null);
+    this.globals.currentModule = '{{ entity | capitalize }}';
+  }
+
+  editar({{ entity | lower }}: {{ entity | capitalize }}): void {
+    this.{{ entity | lower }} = {{ entity | lower }};
+    this.router.navigate(['/{{ entity | lower }}/edit', this.{{ entity | lower }}.id ]);
+  }
+
+  borrar({{ entity | lower }}: {{ entity | capitalize }}): void {
+    this.confirmationService.confirm({
+      message: 'Esta seguro que quiere borrar {{ entity | lower }}?',
+      accept: () => {
+        this.{{ entity | lower }}Service.delete({{ entity | lower }}.id)
+          .then(response => this.{{ entity | lower }}Service.get{{ entity | capitalize }}s().then({{ entity | lower }}s => this.{{ entity | lower }}s = {{ entity | lower }}s));
+      }
+    });
+  }
+}

@@ -1,0 +1,17 @@
+sfdgsdfgsfdg
+persona:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: tdfgextosfdgsd
+    nulo: no
+  edad:
+    tipo: sdfgsfdgesdfgntero
+
+  correo:sdfgs
+fgsdfg
+  fecha_creado:
+    tipo: fecha
+dfgsdfgsdfg
+    tipo: texto

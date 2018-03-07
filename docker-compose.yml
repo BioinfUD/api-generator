@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  apigenerator:
+    container_name: "restgen"
+    build: ./restgen
+    volumes:
+      - "./srcgen:/restgen/src"
+      - "./models:/restgen/models"

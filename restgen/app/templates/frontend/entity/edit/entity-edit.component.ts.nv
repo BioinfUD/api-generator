@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { {{entity|capitalize}} } from '../../models/{{entity|lower}}';
+import { {{entity|capitalize}}Service } from '../../services/{{entity|lower}}.service';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Params } from '@angular/router';
+
+
+import 'rxjs/add/operator/switchMap';
+
+@Component({
+  selector: 'app-{{entity|lower}}-edit',
+  templateUrl: './{{entity|lower}}-edit.component.html',
+  styleUrls: []
+})
+export class {{entity|capitalize}}EditComponent implements OnInit {
+
+  {{entity|lower}}: {{entity|capitalize}} = new {{entity|capitalize}}();
+  display = false;
+  id: string;
+  test = new Date('2016-01-05T09:05:05.035Z');
+
+  constructor(private route: ActivatedRoute, private location: Location, private {{entity|lower}}Service: {{entity|capitalize}}Service) {
+
+  }
+
+  actualizar({{entity|lower}}: {{entity|capitalize}}): void {
+    this.{{entity|lower}}Service.update({{entity|lower}}).then(() => this.display = true);
+  }
+
+  ngOnInit() {
+    this.route.params.switchMap((params: Params) => this.{{entity|lower}}Service.get{{entity|capitalize}}(params['id']))
+      .subscribe({{entity|lower}} => this.{{entity|lower}} = {{entity|lower}});
+  }
+
+  regresar(): void {
+    this.location.back();
+  }
+
+  cerrarDialogo(): void {
+    this.display = false;
+    this.location.back();
+  }
+}

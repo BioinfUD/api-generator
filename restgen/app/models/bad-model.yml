@@ -1,0 +1,32 @@
+---
+persona:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: texto
+    nulo: no
+  edad:
+    tipo: entero
+
+  correo:
+
+  fecha_creado:
+    tipo: fecha
+
+entidad:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: asdjfoiasjdfoiadsf
+    llave_foranea: persona.id
+
+colegio:
+  id:
+    tipo: entero
+    llave_primaria: si
+  nombre:
+    tipo: texto
+  dependencia:
+    tipo: texto

@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function reset_project {
+
+  # Delete Backend Resources
+  rm -rf $GEN_PATH/development/backend/code/api.py
+
+  # Delete frontend Resources
+  rm -rf $GEN_PATH/development/frontend/code/src/app/app.module.ts
+  rm -rf $GEN_PATH/development/frontend/code/src/app/routing/*
+  rm -rf $GEN_PATH/development/frontend/code/src/app/services/*
+  rm -rf $GEN_PATH/development/frontend/code/src/app/models/*
+  rm -rf $GEN_PATH/development/frontend/code/src/app/navegacion/navegacion.component.html
+
+
+}
+
+
+function clean_generated_code {
+  # Delete generated code for backend
+  rm -rf $GEN_PATH/restgen/backend/code/api.py
+
+  # Delete generated code for frontend
+  rm -rf $GEN_PATH/restgen/frontend/code/entities/*
+  rm -rf $GEN_PATH/restgen/frontend/code/models/*
+  rm -rf $GEN_PATH/restgen/frontend/code/routing/*
+  rm -rf $GEN_PATH/restgen/frontend/code/services/*
+  rm -rf $GEN_PATH/restgen/frontend/code/app.module.ts
+
+}
+
+function genapi {
+ 
+ if [ -z $1 ] || [ -z $2 ]; then
+   cd $GEN_PATH/restgen/app
+   python model_parser.py
+   exit 1
+ fi	 
+
+ cp $PWD/$2 $GEN_PATH/restgen/app/models
+ reset_project
+ clean_generated_code
+ cd restgen/app
+ python model_parser.py $1 $PWD/$2
+
+ # Copy frontend code
+ cp -r $GEN_PATH/restgen/frontend/code/entities/* $GEN_PATH/development/frontend/code/src/app/
+ cp -r $GEN_PATH/restgen/frontend/code/models/* $GEN_PATH/development/frontend/code/src/app/models
+ cp -r $GEN_PATH/restgen/frontend/code/routing/* $GEN_PATH/development/frontend/code/src/app/routing
+ cp -r $GEN_PATH/restgen/frontend/code/services/* $GEN_PATH/development/frontend/code/src/app/services
+ cp -r $GEN_PATH/restgen/frontend/code/app.module.ts $GEN_PATH/development/frontend/code/src/app/
+
+ # Copy backend code
+ cp $GEN_PATH/restgen/backend/code/* $GEN_PATH/development/backend/code/
+
+}
+
+genapi $1 $2
