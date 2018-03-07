@@ -4,7 +4,6 @@ Restgen es una herramienta que permite generar aplicaciones de tipo SPA (Single 
 
 Para ejecutar este proyecto ejecute los siguientes comandos:
 
-
 ```
 cd api-generator
 docker-compose up -d
